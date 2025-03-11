@@ -9,3 +9,6 @@ up:
 
 down:
 	docker-compose down
+
+enter:
+	docker-compose exec app bash
