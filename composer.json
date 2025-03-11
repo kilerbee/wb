@@ -1,0 +1,20 @@
+{
+  "name": "waxbill/api",
+  "type": "project",
+  "require": {
+    "symfony/framework-bundle": "^7.2",
+    "symfony/dotenv": "^7.2",
+    "symfony/yaml": "^7.2",
+    "symfony/runtime": "^7.2",
+    "symfony/console": "^7.2"
+  },
+  "autoload": {
+    "psr-4": { "App\\": "src/" }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "allow-plugins": {
+      "symfony/runtime": true
+    }
+  }
+}
