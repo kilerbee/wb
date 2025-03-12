@@ -2,6 +2,11 @@
 
 The solution is wrapped in Docker with common commands in Makefile. You can run it this way:
 
+Setup the project
+```bash
+make install
+```
+
 Start containers 
 ```bash
 make up
