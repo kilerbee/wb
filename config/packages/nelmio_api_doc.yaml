@@ -1,0 +1,13 @@
+nelmio_api_doc:
+    use_validation_groups: true
+    documentation:
+        info:
+            title: 'Waxbill API'
+            description: 'Waxbill API'
+            version: '1.0.0'
+    areas:
+        path_patterns:
+            - ^/api(?!/docs$)
+    models:
+        names:
+            - { alias: Tag_write, type: App\Entity\Tag, groups: [ write ] }
