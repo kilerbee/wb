@@ -10,4 +10,4 @@ nelmio_api_doc:
             - ^/api(?!/docs$)
     models:
         names:
-            - { alias: Tag_write, type: App\Entity\Tag, groups: [ write ] }
+            - { alias: TagRequest, type: App\Entity\Tag, groups: [ write ] }

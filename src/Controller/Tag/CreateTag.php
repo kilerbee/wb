@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use OpenApi\Attributes as OA;
+use Symfony\Component\Serializer\Context\Normalizer\ObjectNormalizerContextBuilder;
 
 class CreateTag extends BaseController
 {
@@ -32,7 +33,14 @@ class CreateTag extends BaseController
     #[ErrorResponse]
     public function __invoke(Request $request): JsonResponse
     {
-        $tag = $this->serializer->deserialize($request->getContent(), Tag::class, 'json');
+        $tag = $this->serializer->deserialize(
+            $request->getContent(),
+            Tag::class,
+            'json',
+            (new ObjectNormalizerContextBuilder())
+                ->withGroups(['write'])
+                ->toArray(),
+        );
 
         $errors = $this->validator->validate($tag);
 

@@ -15,11 +15,11 @@ class ArticleTag
     #[ORM\Column(type: 'datetime')]
     private \DateTimeInterface $createdAt;
 
-    #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: "tags")]
+    #[ORM\ManyToOne(targetEntity: Article::class, fetch: 'EAGER', inversedBy: "tags")]
     #[ORM\JoinColumn(nullable: false)]
     private Article $article;
 
-    #[ORM\ManyToOne(targetEntity: Tag::class, inversedBy: "articles")]
+    #[ORM\ManyToOne(targetEntity: Tag::class, fetch: 'EAGER', inversedBy: "articles")]
     #[ORM\JoinColumn(nullable: false)]
     private Tag $tag;
 

@@ -2,6 +2,8 @@
 
 namespace App\Response;
 
+use App\DTO\ErrorResponseContent;
+use Nelmio\ApiDocBundle\Attribute\Model;
 use Symfony\Component\HttpFoundation\Response;
 use OpenApi\Attributes as OA;
 
@@ -14,13 +16,8 @@ class ErrorResponse extends OA\Response
             response: Response::HTTP_UNPROCESSABLE_ENTITY,
             description: 'Returns validation errors',
             content: new OA\JsonContent(
-                properties: [
-                    new OA\Property(property: 'type', type: 'string'),
-                    new OA\Property(property: 'title', type: 'string'),
-                    new OA\Property(property: 'detail', type: 'string'),
-                    new OA\Property(property: 'violations', type: 'array', items: new OA\Items(type: 'object')),
-                ]
-            )
+                ref: new Model(type: ErrorResponseContent::class),
+            ),
         );
     }
 }

@@ -23,12 +23,18 @@ class Tag
     #[Assert\Length(min: 1, max: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(targetEntity: ArticleTag::class, mappedBy: 'tag', cascade: ['persist', 'remove'], fetch: 'EXTRA_LAZY', orphanRemoval: true)]
-    private Collection $articles;
+    #[ORM\OneToMany(
+        targetEntity: ArticleTag::class,
+        mappedBy: 'tag',
+        cascade: ['persist', 'remove'],
+        fetch: 'EXTRA_LAZY',
+        orphanRemoval: true,
+    )]
+    private Collection $articleTags;
 
     public function __construct()
     {
-        $this->articles = new ArrayCollection();
+        $this->articleTags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -55,14 +61,14 @@ class Tag
         return $this;
     }
 
-    public function getArticles(): Collection
+    public function getArticleTags(): Collection
     {
-        return $this->articles;
+        return $this->articleTags;
     }
 
-    public function setArticles(Collection $articles): Tag
+    public function setArticleTags(Collection $articleTags): Tag
     {
-        $this->articles = $articles;
+        $this->articleTags = $articleTags;
 
         return $this;
     }
