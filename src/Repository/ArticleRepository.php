@@ -2,11 +2,18 @@
 
 namespace App\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use App\Entity\Article;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\Persistence\ManagerRegistry;
 
-class ArticleRepository extends EntityRepository
+
+class ArticleRepository extends ServiceEntityRepository
 {
+    public function __construct(ManagerRegistry $registry) {
+        parent::__construct($registry, Article::class);
+    }
+
     public function findArticlesByTags(array $tags): array
     {
         $qb = $this->createQueryBuilder('a')

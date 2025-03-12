@@ -13,7 +13,7 @@ class ArticleTag
     private ?int $id = null;
 
     #[ORM\Column(type: 'datetime')]
-    private \DateTimeInterface $createdAt;
+    private readonly \DateTimeInterface $createdAt;
 
     #[ORM\ManyToOne(targetEntity: Article::class, fetch: 'EAGER', inversedBy: "articleTags")]
     #[ORM\JoinColumn(nullable: false)]
@@ -22,6 +22,11 @@ class ArticleTag
     #[ORM\ManyToOne(targetEntity: Tag::class, fetch: 'EAGER', inversedBy: "articleTags")]
     #[ORM\JoinColumn(nullable: false)]
     private Tag $tag;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -59,11 +64,5 @@ class ArticleTag
     public function getCreatedAt(): \DateTimeInterface
     {
         return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): ArticleTag
-    {
-        $this->createdAt = $createdAt;
-        return $this;
     }
 }

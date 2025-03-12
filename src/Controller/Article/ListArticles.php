@@ -4,7 +4,7 @@ namespace App\Controller\Article;
 
 use App\Controller\BaseController;
 use App\Entity\Article;
-use App\Repository\ArticleRepository;
+use App\Service\ArticleService;
 use Nelmio\ApiDocBundle\Attribute\Model;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,14 +29,11 @@ final class ListArticles extends BaseController
             ],
         ),
     )]
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(Request $request, ArticleService $articleService): JsonResponse
     {
         $tagsFilter = $request->query->all('tags');
 
-        /** @var ArticleRepository $repository */
-        $repository = $this->entityManager->getRepository(Article::class);
-
-        $articles = $repository->findArticlesByTags(array_values($tagsFilter));
+        $articles = $articleService->processArticleQuery($tagsFilter);
 
         return $this->json(['articles' => $articles], Response::HTTP_OK, [], ['groups' => ['read']]);
     }

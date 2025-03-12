@@ -4,6 +4,7 @@ namespace App\Controller\Tag;
 
 use App\Controller\BaseController;
 use App\Entity\Tag;
+use App\Repository\TagRepository;
 use Nelmio\ApiDocBundle\Attribute\Model;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,10 +28,8 @@ final class ListTags extends BaseController
             ],
         ),
     )]
-    public function __invoke(): JsonResponse
+    public function __invoke(TagRepository $repository): JsonResponse
     {
-        $tags = $this->entityManager->getRepository(Tag::class)->findAll();
-
-        return $this->json(['tags' => $tags], Response::HTTP_OK, [], ['groups' => ['read']]);
+        return $this->json(['tags' => $repository->findAll()], Response::HTTP_OK, [], ['groups' => ['read']]);
     }
 }

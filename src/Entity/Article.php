@@ -43,22 +43,6 @@ class Article
         return $this->articleTags->map(fn (ArticleTag $articleTag) => $articleTag->getTag())->toArray();
     }
 
-    public function setTags(array $tags): self
-    {
-        $this->articleTags->clear();
-
-        foreach ($tags as $tag) {
-            $this->articleTags->add(
-                (new ArticleTag())
-                    ->setCreatedAt(new \DateTime())
-                    ->setArticle($this)
-                    ->setTag($tag),
-            );
-        }
-
-        return $this;
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -88,9 +72,21 @@ class Article
         return $this->articleTags;
     }
 
-    public function setArticleTags(Collection $articleTags): Article
+    public function addArticleTag(ArticleTag $articleTag): self
     {
-        $this->articleTags = $articleTags;
+        if (!$this->articleTags->contains($articleTag)) {
+            $articleTag->setArticle($this);
+            $this->articleTags->add($articleTag);
+        }
+
+        return $this;
+    }
+
+    public function removeArticleTag(ArticleTag $articleTag): self
+    {
+        if ($this->articleTags->contains($articleTag)) {
+            $this->articleTags->removeElement($articleTag);
+        }
 
         return $this;
     }

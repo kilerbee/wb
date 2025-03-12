@@ -5,8 +5,8 @@ namespace App\Controller\Article;
 use App\Controller\BaseController;
 use App\DTO\ArticleRequest;
 use App\Entity\Article;
-use App\Entity\Tag;
 use App\Response\ErrorResponse;
+use App\Service\ArticleService;
 use Nelmio\ApiDocBundle\Attribute\Model;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +32,7 @@ final class CreateArticle extends BaseController
         ),
     )]
     #[ErrorResponse]
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(Request $request, ArticleService $articleService): JsonResponse
     {
         /** @var ArticleRequest $requestArticle */
         $requestArticle = $this->serializer->deserialize(
@@ -47,12 +47,7 @@ final class CreateArticle extends BaseController
             return $this->respondValidationError($errors);
         }
 
-        $tags = $this->entityManager->getRepository(Tag::class)->findBy(['id' => $requestArticle->tags]);
-
-        $article = (new Article())
-            ->setName($requestArticle->name)
-            ->setTags($tags)
-        ;
+        $article = $articleService->processArticleRequest($requestArticle);
 
         $this->entityManager->persist($article);
         $this->entityManager->flush();
