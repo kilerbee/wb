@@ -20,8 +20,6 @@ final readonly class ArticleService
 
     public function processArticleQuery(array $tagsFilter): array
     {
-        $tagsFilter = array_filter($tagsFilter, fn ($tag) => is_int($tag));
-
         return $this->articleRepository->findArticlesByTags(array_values($tagsFilter));
     }
 

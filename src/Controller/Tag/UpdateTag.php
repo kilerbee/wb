@@ -52,6 +52,6 @@ final class UpdateTag extends BaseController
         $this->entityManager->persist($updatedTag);
         $this->entityManager->flush();
 
-        return $this->json($updatedTag, Response::HTTP_CREATED, [], ['groups' => ['read']]);
+        return $this->json($updatedTag, Response::HTTP_OK, [], ['groups' => ['read']]);
     }
 }

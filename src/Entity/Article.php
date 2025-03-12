@@ -40,7 +40,7 @@ class Article
      */
     public function getTags(): array
     {
-        return $this->articleTags->map(fn (ArticleTag $articleTag) => $articleTag->getTag())->toArray();
+        return $this->articleTags->map(fn (ArticleTag $articleTag) => $articleTag->getTag())->getValues();
     }
 
     public function getId(): ?int
