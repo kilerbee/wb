@@ -3,7 +3,7 @@
 namespace App\DTO;
 
 use App\Entity\Article;
-use Symfony\Component\Serializer\Attribute\Groups;
+use App\Entity\ArticleTag;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class ArticleRequest
@@ -24,7 +24,7 @@ class ArticleRequest
         return new self(
             name: $article->getName(),
             tags: $article->getArticleTags()->map(
-                fn ($articleTag) => $articleTag->getTag()->getId(),
+                fn (ArticleTag $articleTag) => $articleTag->getTag()->getId(),
             )->toArray(),
         );
     }

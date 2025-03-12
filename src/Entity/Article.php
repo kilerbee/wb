@@ -24,7 +24,7 @@ class Article
         targetEntity: ArticleTag::class,
         mappedBy: 'article',
         cascade: ['persist', 'remove'],
-        fetch: 'EXTRA_LAZY',
+        fetch: 'EAGER',
         orphanRemoval: true,
     )]
     private Collection $articleTags;
