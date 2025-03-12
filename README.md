@@ -25,7 +25,7 @@ make down
 
 ## API
 
-After the application is started you can visit `http://localhost:8080/api/doc.json` to see API schema.
+After the application is started you can visit http://localhost:8080/api/doc.json to see API schema.
 
 ### Tags
 
