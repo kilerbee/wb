@@ -18,7 +18,7 @@ final class ListArticles extends BaseController
     #[OA\Tag(name: 'Articles')]
     #[OA\Response(
         response: Response::HTTP_OK,
-        description: 'Returns list of all tags',
+        description: 'Returns list of all articles',
         content: new OA\JsonContent(
             properties: [
                 new OA\Property(
