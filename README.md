@@ -315,3 +315,42 @@ HTTP/1.1 200 OK
     ]
 }
 ```
+
+
+#### Get a single article
+
+Request:
+
+```http request
+GET /api/articles/5 HTTP/1.1
+```
+
+Response:
+
+```text
+HTTP/1.1 200 OK
+
+{
+    "id": 5,
+    "name": "All tags",
+    "tags": [
+        {
+            "id": 1,
+            "name": "new"
+        },
+        {
+            "id": 2,
+            "name": "old"
+        },
+        {
+            "id": 3,
+            "name": "average"
+        },
+        {
+            "id": 4,
+            "name": "ancient"
+        }
+    ]
+}
+
+```
